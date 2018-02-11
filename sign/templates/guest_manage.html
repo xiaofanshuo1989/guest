@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GUEST MANAGE</title>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body role="document">
+<!-- 导航栏 -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/event_manage/">
+                GUEST MANAGE SYSTEM
+            </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/login_success/">发布会</a> </li>
+                <li class="active"><a href="#">嘉宾</a> </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">{{ userName }}</a> </li>
+                <li><a href="/logout/">退出</a> </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 嘉宾搜索表单 -->
+<div class="page-header" style="padding-top: 20px">
+    <div id="navbar" class="navbar-collapse collapse">
+        <form class="navbar-form" method="get" action="/search_guest/">
+            <div class="form-group">
+                <input name="name" placeholder="" type="text">
+            </div>
+            <button type="submit" class="btn btn-success">Search</button>
+        </form>
+    </div>
+</div>
+<!-- 嘉宾列表 -->
+<div class="row" style="padding-top: 10px">
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>id</th><th>name</th><th>phone</th><th>email</th><th>sign</th><th>event</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for guest in guest_list %}
+                <tr>
+                    <td>{{ guest.id }}</td>
+                    <td>{{ guest.realname }}</td>
+                    <td>{{ guest.phone }}</td>
+                    <td>{{ guest.mail }}</td>
+                    <td>{{ guest.sign }}</td>
+                    <td>{{ guest.event }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- 分页器代码 -->
+<div class="pagination">
+    <span class="step-links">
+        {% if guest_list.has_previous %}
+            <a href="?page={{ guest_list.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ guest_list.number }} of {{ guest_list.paginator.num_pages }}
+        </span>
+        {% if guest_list.has_next %}
+            <a href="?page={{ guest_list.next_page_number }}">Next</a>
+        {% endif %}
+    </span>
+</div>
+
+</body>
+</html>

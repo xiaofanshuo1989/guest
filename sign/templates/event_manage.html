@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EVENT MANAGE</title>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body role="document">
+<!-- 导航栏 -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/event_manage/">
+                EVENT MANAGE SYSTEM
+            </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">发布会</a> </li>
+                <li><a href="/guest_manage/">嘉宾</a> </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">{{ userName }}</a> </li>
+                <li><a href="/logout/">退出</a> </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 发布会搜索表单 -->
+<div class="page-header" style="padding-top: 20px">
+    <div id="navbar" class="navbar-collapse collapse">
+        <form class="navbar-form" method="get" action="/search_name/">
+            <div class="form-group">
+                <input name="name" placeholder="" type="text">
+            </div>
+            <button type="submit" class="btn btn-success">Search</button>
+        </form>
+    </div>
+</div>
+<!-- 事件列表 -->
+<div class="row" style="padding-top: 10px">
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>id</th><th>Event</th><th>status</th><th>ddress</th><th>Time</th><th>Sign</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in event_list %}
+                <tr>
+                    <td>{{ event.id }}</td>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.status }}</td>
+                    <td>{{ event.address }}</td>
+                    <td>{{ event.start_time }}</td>
+                    <td>
+                        <a href="/sign_index/{{ event.id }}/" target="{{ event.id }} _blank">
+                            Sign
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>
