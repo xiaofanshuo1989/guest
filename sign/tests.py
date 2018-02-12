@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class ModelTest(TestCase):
     def setUp(self):
-        Event.objects.create(id=10, name='oppo oneplus 3',title= 33, status=True, address='shenzhen', start_time='2016-10-26 14:25:31')
+        Event.objects.create(id=10, name='oppo oneplus 3',limit= 33, status=True, address='shenzhen', start_time='2016-10-26 14:25:31')
         Guest.objects.create(id=10, event_id=10, realname='allen', phone='13415', mail='allen.zhen@qq.com', sign=False)
 
 
@@ -60,7 +60,7 @@ class LoginActionTest(TestCase):
 class EventManageTest(TestCase):
     def setUp(self):
         User.objects.create_user('tim','4151@qq.com', 'qwertyuiop')
-        Event.objects.create(id=10, name='oppo oneplus 3', title=33, status=True, address='shenzhen',start_time='2016-10-26 14:25:31')
+        Event.objects.create(id=10, name='oppo oneplus 3', limit=33, status=True, address='shenzhen',start_time='2016-10-26 14:25:31')
         Guest.objects.create(id=10, event_id=10, realname='allen', phone='13415', mail='allen.zhen@qq.com', sign=False)
         #init login_user
         self.login_user = {'userName':'tim','password':'qwertyuiop'}
